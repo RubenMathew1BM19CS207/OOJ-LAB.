@@ -23,7 +23,7 @@ import java.util.Scanner;
              double r2 = (-b - Math.pow(d, 0.5)) / (2.0 * a);
              System.out.println("The roots are real " + r1 + " and " + r2);
           } 
-          el se if (d == 0.0) 
+          else if (d == 0.0) 
           {
              double r1 = -b / (2.0 * a);
              System.out.println("The root is imaginary " + r1);

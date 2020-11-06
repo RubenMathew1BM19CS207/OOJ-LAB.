@@ -1,0 +1,239 @@
+import java.util.*;
+import java.lang.Math;
+class Account
+{
+	String name;
+	int acctno;
+	char type;
+	double balance;
+	double dep;
+	boolean cheq;
+	
+	void get(char c)
+	{
+		type = c;
+		if(c=='s' || c == 'S')
+		cheq=false;
+		else cheq=true;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter your name");
+		name = sc.nextLine();
+		System.out.println("Enter the account number");
+		acctno = sc.nextInt();
+		System.out.println("Enter the current available balance in your account");
+		balance= sc.nextDouble();
+	}
+	
+	void putd()
+	{
+		System.out.println("Account details");
+		System.out.println("Name: "+name);
+		System.out.println("Account number: "+acctno);
+		System.out.println("Account type :"+type);
+		System.out.println("balance: "+balance);
+	}
+	void dep()
+	{
+				Scanner ss = new Scanner(System.in);
+				System.out.println("Enter the amount to be deposited");
+				dep= ss.nextDouble();
+				balance=balance +dep;
+				System.out.println("Amount has been deposited and balance has been updated");
+	}
+	void display()
+	{		
+				
+				System.out.println("Balance amount is "+balance);
+	}	
+	
+	void check()
+	{			
+				if(cheq==false)
+				System.out.println("Cheque book facility is not available");
+				else
+				System.out.println("Cheque book facility is available");
+
+	}
+		
+	
+}
+
+class Saving extends Account
+{
+	
+	double rate;
+	
+	double s_with;
+	int n;
+	
+	int ch;
+	double amt;
+	double term;
+	double pr;
+
+	
+				
+	void ci()
+	{
+					Scanner ss = new Scanner(System.in);
+					System.out.println("Enter principal deposit amount");
+					pr = ss.nextDouble();
+					System.out.println("Enter the rate of interest");
+					rate = ss.nextDouble();
+					System.out.println("Enter the term(years)");
+					term = ss.nextDouble();
+					System.out.println("Enter the number of times interest in compounded annually");
+					n = ss.nextInt();
+					amt = pr* Math.pow((1+(rate/100)),(n*term));
+					balance+= amt;
+					System.out.println("Interest is compounded and deposited; balance is updated");
+				
+	}
+	
+	void with_s()
+	{			
+				
+				Scanner ss = new Scanner(System.in);
+				System.out.println("Enter the amount of money to be withdrawn");
+				s_with = ss.nextDouble();
+				if(s_with>balance)
+				System.out.println("Insufficient balance");
+				else
+				{balance= balance - s_with;
+				System.out.println("Money has been withdrawn and balance has been updated");}
+	}
+				
+		
+	
+			
+				
+}
+
+class Current extends Account
+{
+	
+	double c_with;
+	double pen;
+	double min;
+	Current()
+	{
+		pen=100;
+		min=500;
+	}
+	
+	void with_c()
+	{
+				Scanner xx = new Scanner(System.in);
+				System.out.println("Enter the amount to be withdrawn");
+				c_with= xx.nextDouble();
+				if(c_with>balance)
+				{System.out.println("Insufficient funds!");
+				return;}
+				else
+				{balance= balance- c_with;
+				System.out.println("Amount has been withdrawn and balance has been updated");}
+				if(balance<min)
+				{
+					System.out.println("Balance is below the minimum threshold. Service penalty charge = 100/- .");
+					if(balance<pen)
+					System.out.println("Due to insufficient funds, penalty charge will be deducted from account after replenishing. Current balance is "+balance);
+					else
+					{
+						balance= balance-pen;
+						System.out.println("Penalty charge has been deducted from account balance. Current balance is "+balance);
+					}
+				}
+	}
+				
+			
+}
+
+class Bank
+{
+	public static void main(String sss[])
+	{
+		int cch, chh;
+		Scanner sx = new Scanner(System.in);
+		System.out.println("BANK--Hello User");
+		System.out.println("press 1- Savings; press 2- Current");
+		int ch= sx.nextInt();
+		if(ch==1)
+		{
+			Saving s = new Saving();
+			s.get('S');
+			do{
+			System.out.println("1. Deposit \n2. CI n3. Withdrawal \n4. Account balance\n5. cheque \n6. exit");
+			System.out.println("Enter your choice");
+			chh= sx.nextInt();
+			switch(chh)
+			{
+				case 1:
+				s.dep();
+				break;
+				
+				case 2:
+				s.ci();
+				break;
+				
+				case 3:
+				s.with_s();
+				break;
+				
+				case 4:
+				s.display();
+				break;
+				
+				case 5:
+				s.check();
+				break;
+				
+				case 6:
+				break;
+				
+				default:
+				System.out.println("Wrong option.");
+				break;
+			}
+			}while(chh!=6);
+			
+		}
+		else if(ch==2)
+		{
+			Current cr = new Current();
+			cr.get('C');
+			do{
+			System.out.println("1. Deposit \n2. Chequebook n3. Withdrawal \n4. Account balance\n5. Exit");
+			cch= sx.nextInt();
+			switch(cch)
+			{
+				case 1:
+				cr.dep();
+				break;
+				
+				case 2:
+				cr.check();
+				break;
+				
+				case 3:
+				cr.with_c();
+				break;
+				
+				case 4:
+				cr.display();
+				break;
+				
+				case 5:
+				break;
+				
+				default:
+				System.out.println("invalid.");
+				break;
+			}
+		}while(cch!=5);
+				
+				
+			
+		}
+		else System.out.println("Wrong!");
+	}
+}

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-class Student1{
+class Student1{ 
     Scanner sc = new Scanner(System.in);
     String USN;
     String Name;

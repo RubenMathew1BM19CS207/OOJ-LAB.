@@ -1,0 +1,44 @@
+class Gen<P> 
+{
+
+   P obj; 
+
+   Gen(P ob) 
+  {
+   obj = ob;
+  }
+
+  P getobj()
+  { 
+   return obj;
+  }
+
+  void showType() 
+  {
+   System.out.println("Type of P is " +
+   obj.getClass().getName());
+  }
+
+}
+
+public class generic 
+{
+  public static void main(String args[]) 
+ {
+  Gen<Integer>iobj;
+  iobj = new Gen<Integer>(207);
+  iobj.showType();
+  int v = iobj.getobj();
+  
+  System.out.println("value: " + v);
+  System.out.println();
+
+  Gen<String>strobj = new
+  Gen<String>("Ruben Mathew");
+
+  strobj.showType();
+  String str = strobj.getobj();
+  System.out.println("value: " + str);
+ }
+
+}

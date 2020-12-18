@@ -1,0 +1,42 @@
+import java.util.*;
+import java.lang.*;
+
+class OddThread extends Thread {
+	int odd_sum=0;
+	OddThread(){
+		super("ODD Thread");
+		System.out.println("--Thread--: "+this);
+		start();
+	}
+	public void run(){
+		try{
+			for(int i=1;i<=100;i++){
+				if(i%2 != 0){
+					odd_sum = odd_sum + i;
+					Thread.sleep(100);
+				}
+			}
+		}catch(InterruptedException e){
+			System.out.println("Child Interrupted");
+		}
+		System.out.println(" The sum of Odd Numbers from 1 to 100 is: "+odd_sum);
+	}
+}
+
+class Threadp1 {
+	public static void main(String args[]){
+		int even_sum=0;
+		new OddThread();
+		try{
+			for(int i=1;i<=100;i++){
+				if(i%2 == 0){
+					even_sum = even_sum + i;
+					Thread.sleep(200);
+				}
+			}
+		}catch(InterruptedException e){
+			System.out.println("Main Thread Interrupted");
+		}
+		System.out.println("The sum of Even Numbers from 1 to 100 is: "+even_sum);	
+	}
+}
